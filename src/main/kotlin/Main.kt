@@ -1,6 +1,6 @@
 /*
     Kotlin Evaluate Expression
-    Version: 1.0
+    Version: 1.1
 */
 
 import com.google.gson.Gson
@@ -10,7 +10,7 @@ import kotlin.system.exitProcess
 var kevexMap = HashMap<String, Double>()
 fun output() {
     val gson = Gson()
-    print("${gson.toJson(kevexMap).toString()}\n")
+    print("${gson.toJson(kevexMap)}\n")
 }
 
 fun evalList(sList: List<String>): ListResult {
@@ -28,37 +28,12 @@ fun evalList(sList: List<String>): ListResult {
 }
 
 fun evalFn(fnStr: String): FuncResult {
-    // Add function
-    fun add(dlist: List<Double>): Double {
-        return dlist.sum()
-    }
-
-    // Count function
-    fun count(dlist: List<Double>): Double {
-        return dlist.size.toDouble()
-    }
-
-    // Highest value function
-    fun high(dlist: List<Double>): Double {
-        return dlist.max()
-    }
-
-    // Lowest value function
-    fun low(dlist: List<Double>): Double {
-        return dlist.min()
-    }
-
-    // None function
-    fun none(dlist: List<Double>): Double {
-        return 00.00
-    }
-
     return when (fnStr) {
-        ":=" -> FuncResult(::add, null)
-        "#=" -> FuncResult(::count, null)
-        "|=" -> FuncResult(::high, null)
-        "&=" -> FuncResult(::low, null)
-        else -> FuncResult(::none, "Error: Associated function not found!")
+        ":=" -> FuncResult(fun(dlist: List<Double>): Double { return dlist.sum() }, null)
+        "#=" -> FuncResult(fun(dlist: List<Double>): Double { return dlist.size.toDouble() }, null)
+        "|=" -> FuncResult(fun(dlist: List<Double>): Double { return dlist.max() }, null)
+        "&=" -> FuncResult(fun(dlist: List<Double>): Double { return dlist.min() }, null)
+        else -> FuncResult(fun(_: List<Double>): Double { return 00.00 }, "Error: Associated function not found!")
     }
 }
 

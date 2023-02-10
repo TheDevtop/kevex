@@ -1,6 +1,6 @@
 # Kotlin evaluate expression
 
-Kevex is a Kotlin port of the [Evex evalutation engine](https://github.com/TheDevtop/evex),
+Kevex is a Kotlin port of the [Evex evaluation engine](https://github.com/TheDevtop/evex),
 originally written in Go.
 
 ### Usage:
@@ -15,6 +15,7 @@ originally written in Go.
 fa := 3.0
 fx := fa fa fa
 ```
+
 In this example _fa_ is evaluated as 3.0.
 By applying this to _fx_ we get _fx_ = (3.0+3.0+3.0) = 9.
 
